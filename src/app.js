@@ -1,7 +1,10 @@
 import React from 'react'
 
 import './app.css'
+import { Candidates } from './pages'
 
-const App = () => <div className="main"/>
+console.log(Candidates)
+
+const App = () => <Candidates/>
 
 export default App
