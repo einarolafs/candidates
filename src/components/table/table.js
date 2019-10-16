@@ -5,7 +5,11 @@ import Cell from './cell'
 
 import './table.css'
 
-const Table = ({ columns, content, sort, setFilter, filter }) => (
+const LoadingSkeleton = ({ columns }) => new Array(3).fill('')
+  .map(() => new Array(columns.length).fill('')
+    .map(index => <Cell key={index} className="pulls"/>))
+
+const Table = ({ columns, content, sort, setFilter, filter, skeleton }) => (
   <div className="table">
     {columns.map(header => (
       <Cell
@@ -19,7 +23,8 @@ const Table = ({ columns, content, sort, setFilter, filter }) => (
         {header.label}
       </Cell>
     ))}
-    {content.map(row => (
+    {skeleton && content.length <= 0 && <LoadingSkeleton columns={columns}/>}
+    {content.length > 0 && content.map(row => (
       <React.Fragment key={row.id}>
         {columns.map(column => <Cell key={row[column.key]} className="cell">{row[column.key]}</Cell>)}
       </React.Fragment>
@@ -32,6 +37,7 @@ Table.propTypes = {
   content: PropTypes.array,
   filter: PropTypes.object,
   setFilter: PropTypes.func,
+  skeleton: PropTypes.bool,
   sort: PropTypes.func
 }
 

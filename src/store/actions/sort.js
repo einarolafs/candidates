@@ -3,8 +3,6 @@ import * as types from '../reducers'
 const sort = (payload) => {
   const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}`
 
-  console.log(url)
-
   const queryParameters = new URLSearchParams(location.search)
 
   queryParameters.set('sort', payload)

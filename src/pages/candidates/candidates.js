@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import * as services from '../../services'
 import { Table } from '../../components'
+import store, { actions } from '../../store'
 
 const columns = [
   { key: 'id', label: 'ID' },
@@ -16,16 +17,19 @@ const columns = [
 ]
 
 const getData = async (setCandidates) => {
-  const data = await services.fetch('http://personio-fe-test.herokuapp.com/api/v1/candidates')
+  try {
+    const data = await services.fetch('http://personio-fe-test.herokuapp.com/api/v1/candidates')
 
-  setCandidates(data)
+    setCandidates(data)
+  }
+  catch (error) {
+    store.dispatch(actions.error({ id: 'candidates', label: 'Could not load candidates do to a server error, please reload the page' }))
+  }
 }
 
-const Candidates = ({ candidates, setCandidates, filter, setFilter, sort }) => {
+const Candidates = ({ candidates, setCandidates, filter, setFilter, sort, error }) => {
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search)
-
-    console.log(urlParams.get('filter'))
 
     if (urlParams.get('filter')) {
       const id = urlParams.get('filter')
@@ -45,13 +49,14 @@ const Candidates = ({ candidates, setCandidates, filter, setFilter, sort }) => {
 
   return (
     <div className="wrapper">
-      <Table columns={columns} setFilter={filter} filter={filter} sort={sort} content={candidates}/>
+      <Table columns={columns} skeleton={!error} setFilter={setFilter} filter={filter} sort={sort} content={candidates}/>
     </div>
   )
 }
 
 Candidates.propTypes = {
   candidates: PropTypes.array,
+  error: PropTypes.bool,
   filter: PropTypes.object,
   setCandidates: PropTypes.func,
   setFilter: PropTypes.func,

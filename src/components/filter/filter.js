@@ -21,8 +21,8 @@ const Filter = ({ onChange, className, value, selected }) => {
 
   return (
     <div className={`filter-wrapper ${className}`}>
-      {<button onClick={handleFilterClick} className="filter-button"><FilterIcon selected={selected}/></button>}
-      {showFilter && <input ref={inputRef} defaultValue={value} className="filter-input" onKeyUp={handleInput} type="text"/>}
+      {<button onClick={handleFilterClick} className="filter-button"><FilterIcon selected={Boolean(value) && selected}/></button>}
+      {showFilter && <input ref={inputRef} defaultValue={selected ? value : ''} className="filter-input" onKeyUp={handleInput} type="text"/>}
     </div>
   )
 }
