@@ -23,6 +23,23 @@ const getData = async (setCandidates) => {
 
 const Candidates = ({ candidates, setCandidates, filter, sort }) => {
   useEffect(() => {
+    const urlParams = new URLSearchParams(location.search)
+
+    console.log(urlParams.get('filter'))
+
+    if (urlParams.get('filter')) {
+      const id = urlParams.get('filter')
+      const value = urlParams.get('value')
+
+      filter({ id, value })
+    }
+
+    if (urlParams.get('sort')) {
+      const sortValue = urlParams.get('sort')
+
+      sort(sortValue)
+    }
+
     getData(setCandidates)
   }, [])
 
