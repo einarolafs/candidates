@@ -1,14 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import Cell from './cell'
+
 import './table.css'
 
-const Table = ({ columns, content }) => (
+const Table = ({ columns, content, filter, sort }) => (
   <div className="table">
-    {columns.map(header => <div key={header.key} className="header">{header.label}</div>)}
+    {columns.map(header => <Cell key={header.key} className="header" onClick={filter} label={header.label}/>)}
     {content.map(row => (
       <React.Fragment key={row.id}>
-        {columns.map(column => <div key={row.id} className="cell">{row[column.key]}</div>)}
+        {columns.map(column => <Cell key={row.id} className="cell" onClick={sort} label={row[column.key]}/>)}
       </React.Fragment>
     ))}
   </div>
@@ -16,7 +18,9 @@ const Table = ({ columns, content }) => (
 
 Table.propTypes = {
   columns: PropTypes.array,
-  content: PropTypes.array
+  content: PropTypes.array,
+  filter: PropTypes.func,
+  sort: PropTypes.func
 }
 
 export default Table

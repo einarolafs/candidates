@@ -151,12 +151,7 @@ module.exports = {
     // https://github.com/yannickcr/eslint-plugin-react/tree/master/docs/rules
     'react/forbid-prop-types': 'off',
     'react/forbid-foreign-prop-types': 'off',
-    'react/forbid-component-props': ['error', {
-      forbid: [
-        { propName: 'className', allowedFor: ['Link', 'Component', 'Element', 'Text']},
-        { propName: 'style', allowedFor: ['Draggable', 'Element', 'Component']}
-      ]
-    }],
+    'react/forbid-component-props': 'off',
     'react/jsx-curly-newline': ['error', {
       multiline: 'consistent',
       singleline: 'forbid'

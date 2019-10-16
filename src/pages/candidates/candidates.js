@@ -14,14 +14,16 @@ const columns = [
   { key: 'status', label: 'Status' }
 ]
 
-const Candidates = ({ candidates }) => (
+const Candidates = ({ candidates, filter, sort }) => (
   <div className="wrapper">
-    <Table columns={columns} content={candidates}/>
+    <Table columns={columns} filter={filter} sort={sort} content={candidates}/>
   </div>
 )
 
 Candidates.propTypes = {
-  candidates: PropTypes.array
+  candidates: PropTypes.array,
+  filter: PropTypes.func,
+  sort: PropTypes.func
 }
 
 export default Candidates

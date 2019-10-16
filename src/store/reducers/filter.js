@@ -1,10 +1,10 @@
 const initial = null
 const FILTER = 'FILTER'
 
-const filter = (state = initial, action) => {
-  switch (action.type) {
+const filter = (state = initial, { type, payload }) => {
+  switch (type) {
     case FILTER:
-      return state
+      return payload
     default:
       return state
   }

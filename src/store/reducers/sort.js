@@ -1,10 +1,10 @@
 const initial = null
-const SHORT = 'SHORT'
+const SORT = 'SORT'
 
-const sort = (state = initial, action) => {
-  switch (action.type) {
-    case SHORT:
-      return state
+const sort = (state = initial, { type, payload }) => {
+  switch (type) {
+    case SORT:
+      return payload
     default:
       return state
   }
@@ -12,5 +12,5 @@ const sort = (state = initial, action) => {
 
 export default sort
 export {
-  SHORT
+  SORT
 }

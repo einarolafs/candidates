@@ -31,10 +31,10 @@ const initial = [{
 
 const CANDIDATES = 'CANDIDATES'
 
-const candidates = (state = initial, action) => {
-  switch (action.type) {
+const candidates = (state = initial, { type, payload }) => {
+  switch (type) {
     case CANDIDATES:
-      return state
+      return payload
     default:
       return state
   }

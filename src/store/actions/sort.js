@@ -1,8 +1,8 @@
 import * as types from '../reducers'
 
-const short = payload => ({
-  type: types.SHORT,
+const sort = payload => ({
+  type: types.SORT,
   payload
 })
 
-export default short
+export default sort
