@@ -1,10 +1,29 @@
-const initial = null
+const initial = {
+  id: null,
+  order: null
+}
 const SORT = 'SORT'
+
+const sortData = (state, payload) => {
+  if (state.id !== payload) {
+    return {
+      ...initial,
+      id: payload
+    }
+  }
+
+  console.log(state, state.order === 'first' ? 'last' : 'first')
+
+  return {
+    id: payload,
+    order: state.order === 'first' ? 'last' : 'first'
+  }
+}
 
 const sort = (state = initial, { type, payload }) => {
   switch (type) {
     case SORT:
-      return payload
+      return sortData(state, payload)
     default:
       return state
   }

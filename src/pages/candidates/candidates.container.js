@@ -5,27 +5,27 @@ import { actions } from '../../store'
 
 import Candidates from './candidates'
 
-const sortCandidates = (candidates, sort) => [...candidates].sort((a, b) => {
-  if (typeof a[sort] === 'number') {
-    return a[sort] - b[sort]
+const sortCandidates = (candidates, { id, order = 'first' }) => [...candidates].sort((a, b) => {
+  if (typeof a[id] === 'number') {
+    return order === 'first' ? a[id] - b[id] : a[id] + b[id]
   }
 
-  const valueA = a[sort].toUpperCase()
+  const valueA = a[id].toUpperCase()
 
-  const valueB = b[sort].toUpperCase()
+  const valueB = b[id].toUpperCase()
 
   if (valueA < valueB) {
-    return -1
+    return order === 'first' ? -1 : 1
   }
   if (valueA > valueB) {
-    return 1
+    return order === 'first' ? 1 : -1
   }
 
   return 0
 })
 
 const mapStateToProps = ({ candidates: data, sort }) => {
-  const candidates = sort ? sortCandidates(data, sort) : data
+  const candidates = sort.id ? sortCandidates(data, sort) : data
 
   return {
     candidates: candidates.map(({ birth_date, application_date, ...candidate }) => ({

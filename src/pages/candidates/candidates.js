@@ -50,12 +50,7 @@ const Candidates = ({ candidates, setCandidates, filter, sort }) => {
 }
 
 Candidates.propTypes = {
-  candidates: PropTypes.PropTypes.arrayOf(
-    PropTypes.shape({
-      code: PropTypes.string,
-      id: PropTypes.number,
-    })
-  ),
+  candidates: PropTypes.array,
   filter: PropTypes.func,
   setCandidates: PropTypes.func,
   sort: PropTypes.func

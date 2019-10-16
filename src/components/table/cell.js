@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import './table.css'
 
 const Cell = ({ children, id, onClick, className }) => {
-  const handleClick = useCallback(() => onClick(id))
+  const handleClick = useCallback(() => onClick && onClick(id))
 
   const label = children instanceof Date
     ? Intl.DateTimeFormat('en-GB').format(children)
