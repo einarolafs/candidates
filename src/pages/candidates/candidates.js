@@ -3,7 +3,16 @@ import PropTypes from 'prop-types'
 
 import { Table } from '../../components'
 
-const columns = ['id', 'name', 'email', 'birth_date', 'year_of_experience', 'position_applied', 'application_date', 'status']
+const columns = [
+  { key: 'id', label: 'ID' },
+  { key: 'name', label: 'Name' },
+  { key: 'email', label: 'Email' },
+  { key: 'birth_date', label: 'Birth date' },
+  { key: 'year_of_experience', label: 'Years of Experience' },
+  { key: 'position_applied', label: 'Position Applied' },
+  { key: 'application_date', label: 'Application date' },
+  { key: 'status', label: 'Status' }
+]
 
 const Candidates = ({ candidates }) => (
   <div className="wrapper">
