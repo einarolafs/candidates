@@ -10,7 +10,7 @@ const Table = ({ columns, content, filter, sort }) => (
     {columns.map(header => <Cell key={header.key} className="header" onClick={filter} label={header.label}/>)}
     {content.map(row => (
       <React.Fragment key={row.id}>
-        {columns.map(column => <Cell key={row.id} className="cell" onClick={sort} label={row[column.key]}/>)}
+        {columns.map(column => <Cell key={row[column.key]} className="cell" onClick={sort} label={row[column.key]}/>)}
       </React.Fragment>
     ))}
   </div>
