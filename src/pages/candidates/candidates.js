@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 
+import * as services from '../../services'
 import { Table } from '../../components'
 
 const columns = [
@@ -14,32 +15,15 @@ const columns = [
   { key: 'status', label: 'Status', filter: true }
 ]
 
+const getData = async (setCandidates) => {
+  const data = await services.fetch('http://personio-fe-test.herokuapp.com/api/v1/candidates')
+
+  setCandidates(data)
+}
+
 const Candidates = ({ candidates, setCandidates, filter, sort }) => {
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await window.fetch('http://personio-fe-test.herokuapp.com/api/v1/candidates')
-
-        if (response.ok) {
-          const { data, error } = await response.json()
-
-          if (error) {
-            if (error.code === 500) {
-              return console.log('have to try again')
-            }
-
-            throw Error(error.message)
-          }
-
-          setCandidates(data)
-        }
-      }
-      catch (error) {
-        console.error('Error found')
-      }
-    }
-
-    fetchData()
+    getData(setCandidates)
   }, [])
 
   return (
