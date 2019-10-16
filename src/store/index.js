@@ -1,6 +1,7 @@
 import { createStore } from 'redux'
 
 import reducers from './reducers'
+import actions from './actions'
 
 const store = createStore(
   reducers,
@@ -9,3 +10,6 @@ const store = createStore(
 )
 
 export default store
+export {
+  actions
+}
