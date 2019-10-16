@@ -43,12 +43,13 @@ const mapStateToProps = ({ candidates, sort, filter }) => {
       ...candidate,
       birth_date: new Date(birth_date),
       application_date: new Date(application_date)
-    }))
+    })),
+    filter
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  filter: payload => dispatch(actions.filter(payload)),
+  setFilter: payload => dispatch(actions.filter(payload)),
   sort: payload => dispatch(actions.sort(payload)),
   setCandidates: data => dispatch(actions.candidates(data))
 })

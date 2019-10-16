@@ -5,7 +5,7 @@ import { Filter as FilterIcon } from '../icons'
 
 import './filter.css'
 
-const Filter = ({ onChange, className }) => {
+const Filter = ({ onChange, className, value, selected }) => {
   const inputRef = useRef(null)
   const [showFilter, toggleFilter] = useState(false)
 
@@ -21,15 +21,17 @@ const Filter = ({ onChange, className }) => {
 
   return (
     <div className={`filter-wrapper ${className}`}>
-      {<button onClick={handleFilterClick} className="filter-button"><FilterIcon/></button>}
-      {showFilter && <input ref={inputRef} className="filter-input" onKeyUp={handleInput} type="text"/>}
+      {<button onClick={handleFilterClick} className="filter-button"><FilterIcon selected={selected}/></button>}
+      {showFilter && <input ref={inputRef} defaultValue={value} className="filter-input" onKeyUp={handleInput} type="text"/>}
     </div>
   )
 }
 
 Filter.propTypes = {
   className: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  selected: PropTypes.bool,
+  value: PropTypes.string
 }
 
 export default Filter

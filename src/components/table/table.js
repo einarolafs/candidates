@@ -5,7 +5,7 @@ import Cell from './cell'
 
 import './table.css'
 
-const Table = ({ columns, content, sort, filter }) => (
+const Table = ({ columns, content, sort, setFilter, filter }) => (
   <div className="table">
     {columns.map(header => (
       <Cell
@@ -13,7 +13,8 @@ const Table = ({ columns, content, sort, filter }) => (
         id={header.key}
         className="header"
         onClick={header.sort && sort}
-        filter={header.filter && filter}
+        setFilter={header.filter && setFilter}
+        filter={filter}
       >
         {header.label}
       </Cell>
@@ -29,7 +30,8 @@ const Table = ({ columns, content, sort, filter }) => (
 Table.propTypes = {
   columns: PropTypes.array,
   content: PropTypes.array,
-  filter: PropTypes.func,
+  filter: PropTypes.object,
+  setFilter: PropTypes.func,
   sort: PropTypes.func
 }
 

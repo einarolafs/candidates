@@ -5,9 +5,9 @@ import { Filter } from '../../components'
 
 import './cell.css'
 
-const Cell = ({ children, id, onClick, className, filter }) => {
+const Cell = ({ children, id, onClick, className, filter, setFilter }) => {
   const handleClick = useCallback(() => onClick && onClick(id))
-  const handleFilter = useCallback(value => filter({ id, value }))
+  const handleFilter = useCallback(value => setFilter({ id, value }))
 
   const label = children instanceof Date
     ? new Intl.DateTimeFormat('en-GB').format(children)
@@ -18,7 +18,7 @@ const Cell = ({ children, id, onClick, className, filter }) => {
       className={`cell ${className}`}
     >
       <span role="button" className={`cell-label ${onClick ? 'clickable' : ''}`} tabIndex={0} onClick={handleClick}>{label}</span>
-      {filter && <Filter className="cell-filter" onChange={handleFilter}/>}
+      {setFilter && <Filter className="cell-filter" selected={filter.id === id} value={filter.value} onChange={handleFilter}/>}
     </div>
   )
 }
@@ -26,9 +26,14 @@ const Cell = ({ children, id, onClick, className, filter }) => {
 Cell.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.number, Date, PropTypes.element]),
   className: PropTypes.string,
-  filter: PropTypes.func,
+  filter: PropTypes.object,
   id: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  setFilter: PropTypes.func
+}
+
+Cell.defaultProps = {
+  filter: { id: null, value: null }
 }
 
 export default Cell
