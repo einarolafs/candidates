@@ -9,16 +9,6 @@
   border-right: var(--table-border-style);
 }
 
-.table > div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  border-left: var(--table-border-style);
-  border-top: var(--table-border-style);
-  padding: 5px;
-}
-
 .table > div:nth-child(odd) {
   background: rgb(228, 228, 228);
 }
@@ -26,8 +16,4 @@
 .table .header {
   box-shadow: 0 5px 5px rgba(0,0,0, 0.2);
   position: relative;
-}
-
-.onClick {
-  cursor: pointer;
 }

@@ -1,4 +1,7 @@
-const initial = null
+const initial = {
+  id: null,
+  value: null
+}
 const FILTER = 'FILTER'
 
 const filter = (state = initial, { type, payload }) => {

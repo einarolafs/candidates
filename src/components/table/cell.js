@@ -1,21 +1,32 @@
 import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
 
-import './table.css'
+import { Filter } from '../../components'
 
-const Cell = ({ children, id, onClick, className }) => {
+import './cell.css'
+
+const Cell = ({ children, id, onClick, className, filter }) => {
   const handleClick = useCallback(() => onClick && onClick(id))
+  const handleFilter = useCallback(value => filter({ id, value }))
 
   const label = children instanceof Date
-    ? Intl.DateTimeFormat('en-GB').format(children)
+    ? new Intl.DateTimeFormat('en-GB').format(children)
     : children
 
-  return <div className={`${className} ${onClick ? 'onClick' : ''}`} role="button" tabIndex={0} onClick={handleClick}>{label}</div>
+  return (
+    <div
+      className={`cell ${className}`}
+    >
+      <span role="button" className={`cell-label ${onClick ? 'clickable' : ''}`} tabIndex={0} onClick={handleClick}>{label}</span>
+      {filter && <Filter className="cell-filter" onChange={handleFilter}/>}
+    </div>
+  )
 }
 
 Cell.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.number, Date, PropTypes.element]),
   className: PropTypes.string,
+  filter: PropTypes.func,
   id: PropTypes.string,
   onClick: PropTypes.func
 }

@@ -1,0 +1,29 @@
+.filter-wrapper {
+  width: 20px;
+  height: 20px;
+}
+
+.filter-wrapper svg {
+  width: inherit;
+  height: inherit;
+}
+
+.filter-button {
+  width: inherit;
+  height: inherit;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.filter-input {
+  position: relative;
+  bottom: 6px;
+  left: 0px;
+  height: 20px;
+  width: 150px;
+  box-shadow: 0 2px 2px rgba(0,0,0, 0.2);
+  border: var(--table-border-style);
+  z-index: 10;
+}

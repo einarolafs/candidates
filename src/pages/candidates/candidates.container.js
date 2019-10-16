@@ -24,11 +24,22 @@ const sortCandidates = (candidates, { id, order = 'first' }) => [...candidates].
   return 0
 })
 
-const mapStateToProps = ({ candidates: data, sort }) => {
-  const candidates = sort.id ? sortCandidates(data, sort) : data
+const filterCandidates = (candidates, { id, value }) => [...candidates].filter((candidate) => {
+  if (value === '') {
+    return true
+  }
+
+  const text = candidate[id].toLowerCase()
+
+  return text.includes(value.toLowerCase())
+})
+
+const mapStateToProps = ({ candidates, sort, filter }) => {
+  const sortedCandidates = sort.id ? sortCandidates(candidates, sort) : candidates
+  const filteredCandidates = filter.id ? filterCandidates(sortedCandidates, filter) : sortedCandidates
 
   return {
-    candidates: candidates.map(({ birth_date, application_date, ...candidate }) => ({
+    candidates: filteredCandidates.map(({ birth_date, application_date, ...candidate }) => ({
       ...candidate,
       birth_date: new Date(birth_date),
       application_date: new Date(application_date)
@@ -37,8 +48,8 @@ const mapStateToProps = ({ candidates: data, sort }) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  filter: item => dispatch(actions.filter(item)),
-  sort: item => dispatch(actions.sort(item)),
+  filter: payload => dispatch(actions.filter(payload)),
+  sort: payload => dispatch(actions.sort(payload)),
   setCandidates: data => dispatch(actions.candidates(data))
 })
 

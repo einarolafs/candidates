@@ -1,0 +1,19 @@
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+  border-left: var(--table-border-style);
+  border-top: var(--table-border-style);
+  padding: 5px;
+}
+
+.cell-label {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.clickable {
+  cursor: pointer;
+}

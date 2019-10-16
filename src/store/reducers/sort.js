@@ -12,8 +12,6 @@ const sortData = (state, payload) => {
     }
   }
 
-  console.log(state, state.order === 'first' ? 'last' : 'first')
-
   return {
     id: payload,
     order: state.order === 'first' ? 'last' : 'first'

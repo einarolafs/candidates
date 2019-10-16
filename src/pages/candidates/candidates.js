@@ -5,13 +5,13 @@ import { Table } from '../../components'
 
 const columns = [
   { key: 'id', label: 'ID' },
-  { key: 'name', label: 'Name' },
+  { key: 'name', label: 'Name', filter: true },
   { key: 'email', label: 'Email' },
   { key: 'birth_date', label: 'Birth date' },
   { key: 'year_of_experience', label: 'Years of Experience', sort: true },
-  { key: 'position_applied', label: 'Position Applied', sort: true },
+  { key: 'position_applied', label: 'Position Applied', sort: true, filter: true },
   { key: 'application_date', label: 'Application date', sort: true },
-  { key: 'status', label: 'Status' }
+  { key: 'status', label: 'Status', filter: true }
 ]
 
 const Candidates = ({ candidates, setCandidates, filter, sort }) => {
