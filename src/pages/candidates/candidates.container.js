@@ -2,41 +2,13 @@
 import { connect } from 'react-redux'
 
 import { actions } from '../../store'
+import selectors from '../selectors'
 
 import Candidates from './candidates'
 
-const sortCandidates = (candidates, { id, order = 'first' }) => [...candidates].sort((a, b) => {
-  if (typeof a[id] === 'number') {
-    return order === 'first' ? a[id] - b[id] : b[id] - a[id]
-  }
-
-  const valueA = a[id].toUpperCase()
-
-  const valueB = b[id].toUpperCase()
-
-  if (valueA < valueB) {
-    return order === 'first' ? -1 : 1
-  }
-  if (valueA > valueB) {
-    return order === 'first' ? 1 : -1
-  }
-
-  return 0
-})
-
-const filterCandidates = (candidates, { id, value }) => [...candidates].filter((candidate) => {
-  if (value === '') {
-    return true
-  }
-
-  const text = candidate[id].toLowerCase()
-
-  return text.includes(value.toLowerCase())
-})
-
 const mapStateToProps = ({ candidates: { data, loaded }, sort, filter, error }) => {
-  const sortedCandidates = sort.id ? sortCandidates(data, sort) : data
-  const filteredCandidates = filter.id ? filterCandidates(sortedCandidates, filter) : sortedCandidates
+  const sortedCandidates = sort.id ? selectors.sortCandidates(data, sort) : data
+  const filteredCandidates = filter.id ? selectors.filterCandidates(sortedCandidates, filter) : sortedCandidates
 
   return {
     candidates: filteredCandidates.map(({ birth_date, application_date, ...candidate }) => ({
