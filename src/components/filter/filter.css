@@ -19,12 +19,13 @@
 
 .filter-input {
   position: relative;
-  bottom: 6px;
-  left: 0px;
+  bottom: -23px;
+  left: -155px;
   height: 20px;
   width: 150px;
   box-shadow: 0 2px 2px rgba(0,0,0, 0.2);
   border: var(--table-border-style);
   z-index: 10;
   font-size: 1em;
+  padding: 3px 5px;
 }

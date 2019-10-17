@@ -23,11 +23,11 @@ const getData = async (setCandidates) => {
     setCandidates(data)
   }
   catch (error) {
-    store.dispatch(actions.error({ id: 'candidates', label: 'Could not load candidates do to a server error, please reload the page' }))
+    store.dispatch(actions.error({ id: 'candidates', label: 'Could not load candidates due to a server error. Please reload the page' }))
   }
 }
 
-const Candidates = ({ candidates, setCandidates, filter, setFilter, sort, setSort, error }) => {
+const Candidates = ({ candidates, setCandidates, filter, setFilter, sort, setSort, loaded }) => {
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search)
 
@@ -50,15 +50,15 @@ const Candidates = ({ candidates, setCandidates, filter, setFilter, sort, setSor
 
   return (
     <div className="wrapper">
-      <Table columns={columns} skeleton={!error} setFilter={setFilter} filter={filter} sort={sort} setSort={setSort} content={candidates}/>
+      <Table columns={columns} skeleton={!loaded} setFilter={setFilter} filter={filter} sort={sort} setSort={setSort} content={candidates}/>
     </div>
   )
 }
 
 Candidates.propTypes = {
   candidates: PropTypes.array,
-  error: PropTypes.bool,
   filter: PropTypes.object,
+  loaded: PropTypes.bool,
   setCandidates: PropTypes.func,
   setFilter: PropTypes.func,
   setSort: PropTypes.func,

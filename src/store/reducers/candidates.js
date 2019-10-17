@@ -1,4 +1,4 @@
-const initial = []
+const initial = { data: [], loaded: false }
 
 const CANDIDATES = 'CANDIDATES'
 

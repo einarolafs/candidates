@@ -24,7 +24,7 @@ const Table = ({ columns, content, setSort, sort, setFilter, filter, skeleton })
         {header.label}
       </Cell>
     ))}
-    {skeleton && content.length <= 0 && <LoadingSkeleton columns={columns}/>}
+    {skeleton && <LoadingSkeleton columns={columns}/>}
     {content.length > 0 && content.map(row => (
       <React.Fragment key={row.id}>
         {columns.map(column => <Cell key={row[column.key]} className="cell">{row[column.key]}</Cell>)}

@@ -34,9 +34,8 @@ const filterCandidates = (candidates, { id, value }) => [...candidates].filter((
   return text.includes(value.toLowerCase())
 })
 
-const mapStateToProps = ({ candidates, sort, filter, error }) => {
-  console.log(sort)
-  const sortedCandidates = sort.id ? sortCandidates(candidates, sort) : candidates
+const mapStateToProps = ({ candidates: { data, loaded }, sort, filter, error }) => {
+  const sortedCandidates = sort.id ? sortCandidates(data, sort) : data
   const filteredCandidates = filter.id ? filterCandidates(sortedCandidates, filter) : sortedCandidates
 
   return {
@@ -46,8 +45,8 @@ const mapStateToProps = ({ candidates, sort, filter, error }) => {
       application_date: new Date(application_date)
     })),
     filter,
-    error: error.id === 'candidates',
-    sort
+    sort,
+    loaded: error.id === 'candidates' || loaded
   }
 }
 
