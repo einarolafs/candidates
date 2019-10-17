@@ -1,11 +1,15 @@
 import * as types from '../reducers'
 
-const sort = (payload) => {
+const sort = ({ id, order }) => {
   const url = `${window.location.protocol}//${window.location.host}${window.location.pathname}`
 
   const queryParameters = new URLSearchParams(location.search)
 
-  queryParameters.set('sort', payload)
+  queryParameters.set('sort', id)
+
+  if (order !== null) {
+    queryParameters.set('order', order)
+  }
 
   const newUrl = `${url}?${queryParameters.toString()}`
 
@@ -13,7 +17,7 @@ const sort = (payload) => {
 
   return {
     type: types.SORT,
-    payload
+    payload: { id, order }
   }
 }
 

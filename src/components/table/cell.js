@@ -5,8 +5,17 @@ import { Filter } from '../../components'
 
 import './cell.css'
 
-const Cell = ({ children, id, onClick, className, filter, setFilter }) => {
-  const handleClick = useCallback(() => onClick && onClick(id))
+const Cell = ({ children, id, onClick, className, filter, setFilter, sort }) => {
+  const handleClick = useCallback(() => {
+    const { order } = sort
+
+    const newOrder = order === null || order === 'last' ? 'first' : 'last'
+
+    if (onClick) {
+      onClick({ id, order: newOrder })
+    }
+  })
+
   const handleFilter = useCallback(value => setFilter({ id, value }))
 
   const label = children instanceof Date
@@ -29,7 +38,8 @@ Cell.propTypes = {
   filter: PropTypes.object,
   id: PropTypes.string,
   onClick: PropTypes.func,
-  setFilter: PropTypes.func
+  setFilter: PropTypes.func,
+  sort: PropTypes.object
 }
 
 Cell.defaultProps = {

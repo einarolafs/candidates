@@ -27,7 +27,7 @@ const getData = async (setCandidates) => {
   }
 }
 
-const Candidates = ({ candidates, setCandidates, filter, setFilter, sort, error }) => {
+const Candidates = ({ candidates, setCandidates, filter, setFilter, sort, setSort, error }) => {
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search)
 
@@ -39,9 +39,10 @@ const Candidates = ({ candidates, setCandidates, filter, setFilter, sort, error 
     }
 
     if (urlParams.get('sort')) {
-      const sortValue = urlParams.get('sort')
+      const id = urlParams.get('sort')
+      const order = urlParams.get('order')
 
-      sort(sortValue)
+      setSort({ id, order })
     }
 
     getData(setCandidates)
@@ -49,7 +50,7 @@ const Candidates = ({ candidates, setCandidates, filter, setFilter, sort, error 
 
   return (
     <div className="wrapper">
-      <Table columns={columns} skeleton={!error} setFilter={setFilter} filter={filter} sort={sort} content={candidates}/>
+      <Table columns={columns} skeleton={!error} setFilter={setFilter} filter={filter} sort={sort} setSort={setSort} content={candidates}/>
     </div>
   )
 }
@@ -60,7 +61,8 @@ Candidates.propTypes = {
   filter: PropTypes.object,
   setCandidates: PropTypes.func,
   setFilter: PropTypes.func,
-  sort: PropTypes.func
+  setSort: PropTypes.func,
+  sort: PropTypes.object
 }
 
 export default Candidates

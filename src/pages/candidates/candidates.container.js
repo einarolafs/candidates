@@ -7,7 +7,7 @@ import Candidates from './candidates'
 
 const sortCandidates = (candidates, { id, order = 'first' }) => [...candidates].sort((a, b) => {
   if (typeof a[id] === 'number') {
-    return order === 'first' ? a[id] - b[id] : a[id] + b[id]
+    return order === 'first' ? a[id] - b[id] : b[id] - a[id]
   }
 
   const valueA = a[id].toUpperCase()
@@ -35,6 +35,7 @@ const filterCandidates = (candidates, { id, value }) => [...candidates].filter((
 })
 
 const mapStateToProps = ({ candidates, sort, filter, error }) => {
+  console.log(sort)
   const sortedCandidates = sort.id ? sortCandidates(candidates, sort) : candidates
   const filteredCandidates = filter.id ? filterCandidates(sortedCandidates, filter) : sortedCandidates
 
@@ -45,13 +46,14 @@ const mapStateToProps = ({ candidates, sort, filter, error }) => {
       application_date: new Date(application_date)
     })),
     filter,
-    error: error.id === 'candidates'
+    error: error.id === 'candidates',
+    sort
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   setFilter: payload => dispatch(actions.filter(payload)),
-  sort: payload => dispatch(actions.sort(payload)),
+  setSort: payload => dispatch(actions.sort(payload)),
   setCandidates: data => dispatch(actions.candidates(data))
 })
 
