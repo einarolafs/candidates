@@ -18,7 +18,9 @@ const columns = [
 
 const getData = async (setCandidates) => {
   try {
-    const data = await services.fetch('http://personio-fe-test.herokuapp.com/api/v1/candidates')
+    const data = await services.fetch('http://localhost:3004/data')
+
+    console.log(data)
 
     setCandidates(data)
   }

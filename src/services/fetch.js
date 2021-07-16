@@ -1,14 +1,23 @@
 const fetch = async (url) => {
-  const response = await window.fetch(url)
+  try {
+    const randomError = Math.floor(Math.random() * 6) + 1
 
-  if (response.ok) {
-    const { data, error } = await response.json()
+    /* Fake a possible error from the resonse randomly */
 
-    if (error) {
-      throw Error(error.message)
+    if (randomError === 6) {
+      throw Error('something went wrang')
     }
 
-    return data
+    const response = await window.fetch(url)
+
+    if (response.ok) {
+      const data = await response.json()
+
+      return data
+    }
+  }
+  catch (error) {
+    throw Error(error.message)
   }
 }
 
