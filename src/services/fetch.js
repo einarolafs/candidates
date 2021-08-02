@@ -2,10 +2,10 @@ const fetch = async (url) => {
   try {
     const randomError = Math.floor(Math.random() * 6) + 1
 
-    /* Fake a possible error from the resonse randomly */
+    /* Fake a possible error from the response randomly */
 
     if (randomError === 6) {
-      throw Error('something went wrang')
+      throw Error('something went wrong')
     }
 
     const response = await window.fetch(url)
